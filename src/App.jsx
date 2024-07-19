@@ -5,7 +5,7 @@ import { WeatherDetails } from './assets/components/WeatherDetails';
 function App() {
   return (
     <>
-      <div className='h-[100vh] bg-cover' style={{ backgroundImage: `url(${bgim})` }}>
+      <div className='h-full bg-cover' style={{ backgroundImage: `url(${bgim})` }}>
         <WeatherDetails />
       </div>
     </>
