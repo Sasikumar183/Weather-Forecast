@@ -77,7 +77,7 @@ export const WeatherDetails = () => {
         <>
             <br />
             <br />
-            <div className='flex flex-col space-y-4 mx-auto p-5 shadow-black shadow-lg rounded-lg bg-transparent backdrop-blur-3xl w-[70%]  lg:w-[40%] xl:w-[30%]'>
+            <div className='flex flex-col space-y-4 mx-auto p-5 shadow-black shadow-lg rounded-lg bg-transparent backdrop-blur-3xl w-[80%]  lg:w-[40%] xl:w-[30%]'>
                 <span className='flex border bg-white rounded-xl'>
                     <input
                         type='text'
