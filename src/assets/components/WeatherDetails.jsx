@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Search from '../images/search.png';
 import Clear from '../images/clear.png';
 import Cloudy from '../images/cloudy.jfif';
@@ -9,11 +9,12 @@ import Snow from '../images/snow.jfif';
 import Wind from '../images/wind.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 export const WeatherDetails = () => {
     const [icon, setIcon] = useState(Snow);
     const [temp, setTemp] = useState(0);
-    const [city, setCity] = useState();
-    const [country, setCountry] = useState();
+    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('');
     const [lat, setLat] = useState(0);
     const [log, setLog] = useState(0);
     const [humiv, setHumv] = useState(0);
@@ -34,25 +35,27 @@ export const WeatherDetails = () => {
         "10n": Rain,
         "10d": Rain,
         "13n": Snow,
-        "13d": Sngitow
-    }
-    useEffect(()=>{
+        "13d": Snow
+    };
+
+    useEffect(() => {
         setCity("Search City");
-    },[])
+    }, []);
+
     const getdata = async () => {
         let apikey = '763ef2a9daea49fe1f574f193cdc1807';
-        let url = `https://api.openweathermap.org/data/2.5/weather?q=${text}&appid=${apikey}&units=Metric`;
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${text}&appid=${apikey}&units=metric`;
         try {
             let response = await fetch(url);
             if (!response.ok) {
                 throw new Error('City not found');
             }
             let data = await response.json();
-            console.log(data)
-            const weathericon=data.weather[0].icon;
-            setIcon(weathermap[weathericon]||Clear)
+            console.log(data);
+            const weathericon = data.weather[0].icon;
+            setIcon(weathermap[weathericon] || Clear);
             setCity(data.name);
-            setTemp(data.main.temp+`°C`);
+            setTemp(data.main.temp + `°C`);
             setCountry(data.sys.country);
             setLat(data.coord.lat);
             setLog(data.coord.lon);
@@ -62,10 +65,10 @@ export const WeatherDetails = () => {
             setCity("City Not Found");
             setTemp("No data");
             setCountry("No data");
-            setLat("No data");
-            setLog("No data");
-            setHumv("No data");
-            setWinds("No data");
+            setLat(0);
+            setLog(0);
+            setHumv(0);
+            setWinds(0);
             console.error(error);
         }
     };
@@ -74,7 +77,7 @@ export const WeatherDetails = () => {
         <>
             <br />
             <br />
-            <div className='flex flex-col space-y-4 mx-auto p-5 shadow-black shadow-lg rounded-lg bg-transparent backdrop-blur-3xl w-[90%] h-[85vh] lg:w-[40%] xl:h-[90vh] md:h-[90vh]'>
+            <div className='flex flex-col space-y-4 mx-auto p-5 shadow-black shadow-lg rounded-lg bg-transparent backdrop-blur-3xl w-[70%]  lg:w-[40%] xl:w-[30%]'>
                 <span className='flex border bg-white rounded-xl'>
                     <input
                         type='text'
@@ -87,8 +90,7 @@ export const WeatherDetails = () => {
                             }
                         }}
                     />
-                    <FontAwesomeIcon icon={faSearch}  className='w-6 h-8 m-2 text-black cursor-pointer'
-                        onClick={getdata} />
+                    <FontAwesomeIcon icon={faSearch} className='w-6 h-8 m-2 text-black cursor-pointer' onClick={getdata} />
                 </span>
                 <div>
                     <img src={icon} alt='' className='mx-auto h-28 rounded-sm' />
@@ -103,7 +105,7 @@ export const WeatherDetails = () => {
                     <p className='text-center text-white text-3xl font-bold'>{country}</p>
                 </div>
                 <div>
-                    <span className=' '>
+                    <span className=''>
                         <div className='flex space-x-4 mx-auto items-center font justify-center'>
                             <div>
                                 <p className='text-xl font-semibold'>Longitude</p>
